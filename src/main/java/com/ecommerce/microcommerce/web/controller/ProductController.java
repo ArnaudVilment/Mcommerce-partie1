@@ -108,6 +108,25 @@ public class ProductController {
         return chaine;
     }
 
+    // Tri des produits par ordre alphabétique
+    @ApiOperation(value = "Affichage des produits par ordre alphabétiaque.")
+    @GetMapping(value = "/ProduitTriAsc")
+    public String trierProduitsParOrdreAlphabetique() {
+
+        String chaine = "{\n";
+        List<Product> listProduit =  productDao.findAllByOrderByNom();
+        for(int i = 0; i < listProduit.size(); i++) {
+
+            if(i == listProduit.size() - 1)
+                chaine = chaine + listProduit.get(i).toString() + "\n}";
+            else if(chaine.equals("{\n"))
+                chaine = chaine + listProduit.get(i).toString() + ",\n";
+            else if(!chaine.equals(""))
+                chaine = chaine + listProduit.get(i).toString() + ",\n";
+        }
+        return chaine;
+    }
+
     //Pour les tests
     @GetMapping(value = "test/produits/{prix}")
     public List<Product> testeDeRequetes(@PathVariable int prix) {
