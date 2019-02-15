@@ -19,7 +19,6 @@ public class Product {
     @Length(min=3, max=20, message = "Le nom du produit doit avoir entre 3 et 20 caractères !")
     private String nom;
 
-    @Min(value = 1, message = "Le prix doit etre supérieur à zéro!")
     private int prix;
 
     //information que nous ne souhaitons pas exposer
