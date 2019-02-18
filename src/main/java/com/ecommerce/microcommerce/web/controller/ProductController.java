@@ -2,7 +2,7 @@ package com.ecommerce.microcommerce.web.controller;
 
 import com.ecommerce.microcommerce.dao.ProductDao;
 import com.ecommerce.microcommerce.model.Product;
-import com.ecommerce.microcommerce.web.controller.exceptions.ProduitGratuitException;
+import com.ecommerce.microcommerce.web.exceptions.ProduitGratuitException;
 import com.ecommerce.microcommerce.web.exceptions.ProduitIntrouvableException;
 import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
@@ -17,8 +17,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 @Api( description="API pour des opérations CRUD sur les produits.")
@@ -94,7 +92,6 @@ public class ProductController {
         productDao.save(product);
     }
 
-    // Calcul la marge des produits
     @ApiOperation(value = "Calcul la marge de chaque produit en base de donnée et affiche le résultat.")
     @GetMapping(value = "/AdminProduits")
     public String calculerMargeProduit() {
@@ -113,7 +110,6 @@ public class ProductController {
         return chaine;
     }
 
-    // Tri des produits par ordre alphabétique
     @ApiOperation(value = "Affichage des produits par ordre alphabétiaque.")
     @GetMapping(value = "/ProduitTriAsc")
     public String trierProduitsParOrdreAlphabetique() {

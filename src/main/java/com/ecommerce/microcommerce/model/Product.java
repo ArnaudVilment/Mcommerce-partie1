@@ -1,6 +1,6 @@
 package com.ecommerce.microcommerce.model;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
+import io.swagger.annotations.ApiOperation;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
@@ -65,10 +65,15 @@ public class Product {
         return prixAchat;
     }
 
+    public void setPrixAchat() {
+        setPrixAchat();
+    }
+
     public void setPrixAchat(int prixAchat) {
         this.prixAchat = prixAchat;
     }
 
+    @ApiOperation(value = "Gérer l' affichage désiré des produits par ordre alphabétiaque.")
     @Override
     public String toString() {
         return "{\n" +
@@ -79,6 +84,7 @@ public class Product {
                 '}';
     }
 
+    @ApiOperation(value = "Gérer l' affichage des produits lors du calcul de la marge.")
     public String toStringMarge() {
         return "\"Product{" +
                 "id=" + id +
