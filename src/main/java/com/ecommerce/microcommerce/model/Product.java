@@ -76,13 +76,24 @@ public class Product {
     @ApiOperation(value = "Gérer l' affichage désiré des produits par ordre alphabétiaque.")
     @Override
     public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prix=" + prix +
+                '}';
+    }
+
+    //@Override
+    /*public String toString() {
         return "{\n" +
                 "\"id\": " + id + ",\n" +
                 "\"nom\": \"" + nom + "\"" + ",\n" +
                 "\"prix\": " + prix + ",\n" +
                 "\"prixAchat\": " + prixAchat + "\n" +
                 '}';
-    }
+    }*/
+
+
 
     @ApiOperation(value = "Gérer l' affichage des produits lors du calcul de la marge.")
     public String toStringMarge() {

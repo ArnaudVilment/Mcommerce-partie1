@@ -17,7 +17,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Api( description="API pour des opérations CRUD sur les produits.")
 
@@ -94,9 +96,9 @@ public class ProductController {
 
     @ApiOperation(value = "Calcul la marge de chaque produit en base de donnée et affiche le résultat.")
     @GetMapping(value = "/AdminProduits")
-    public String calculerMargeProduit() {
+    public Map<String, Integer> calculerMargeProduit() {
 
-        String chaine = "{\n";
+        /*String chaine = "{\n";
         List<Product> listProduit =  productDao.findAll();
         for(int i = 0; i < listProduit.size(); i++) {
 
@@ -107,12 +109,26 @@ public class ProductController {
             else if(!chaine.equals(""))
                 chaine = chaine + listProduit.get(i).toStringMarge() + ",\n";
          }
-        return chaine;
+        return chaine;*/
+
+        List<Product> produits = productDao.findAll();
+        Map<String,Integer> produitsMarges = new HashMap<>();
+
+        for (Product produit: produits) {
+            String desc = produit.toString();
+            int marge = produit.getPrix()-produit.getPrixAchat();
+            produitsMarges.put(desc, marge);
+        }
+
+        return produitsMarges;
     }
 
     @ApiOperation(value = "Affichage des produits par ordre alphabétiaque.")
     @GetMapping(value = "/ProduitTriAsc")
-    public String trierProduitsParOrdreAlphabetique() {
+    public List<Product> trierProduitsParOrdreAlphabetique() {
+        return productDao.findAllByOrderByNom();
+    }
+    /*public String trierProduitsParOrdreAlphabetique() {
 
         String chaine = "{\n";
         List<Product> listProduit =  productDao.findAllByOrderByNom();
@@ -126,7 +142,7 @@ public class ProductController {
                 chaine = chaine + listProduit.get(i).toString() + ",\n";
         }
         return chaine;
-    }
+    }*/
 
     //Pour les tests
     @GetMapping(value = "test/produits/{prix}")
